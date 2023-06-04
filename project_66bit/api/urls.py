@@ -8,7 +8,8 @@ app_name = 'api'
 router_v1 = DefaultRouter()
 
 router_v1.register(r'words', WordViewSet, basename='words'),
-router_v1.register(r'(?P<letter>.+)/$', WordByFirstLetterViewSet, basename='letter'),
+router_v1.register(r'(?P<letter>.+)/$',
+                   WordByFirstLetterViewSet, basename='letter'),
 router_v1.register('tests', TestsViewSet, basename='tests'),
 
 

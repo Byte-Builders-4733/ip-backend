@@ -1,5 +1,6 @@
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import viewsets
+from rest_framework import viewsets, views
+from rest_framework.response import Response
 from django.shortcuts import get_object_or_404
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import (AllowAny,
@@ -7,6 +8,7 @@ from rest_framework.permissions import (AllowAny,
                                         IsAuthenticatedOrReadOnly)
 from urllib.parse import unquote
 from .models import Word, Test
+from users.models import User
 import random
 from .serializers import WordSerializer, WordByLetterSerializer, TestSerializer
 
@@ -56,3 +58,9 @@ class TestsViewSet(viewsets.ModelViewSet):
             test.save()
             queryset.append(test)
         return queryset
+    
+class TestResultView(views.APIView):
+    def put(self, request):
+        user = User.objects.get(id=request.user.id)
+        User.objects.filter(username=request.user.username).update(tests_count=int(user.tests_count) + 1)
+        return Response(status=200)

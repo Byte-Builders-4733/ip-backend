@@ -16,5 +16,4 @@ router_v1.register('tests', TestsViewSet, basename='tests'),
 urlpatterns = [
     path('v1/', include(router_v1.urls)),
     path('<letter>/', WordByFirstLetterViewSet.as_view({'get': 'list'})),
-
 ]

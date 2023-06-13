@@ -10,5 +10,5 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('register/', RegisterUserView.as_view(), name='registr'),
     path('testsucc/', TestResultView.as_view()),
-    re_path(r'ˆauth/', include('djoser.urls.authtoken')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
 ]
